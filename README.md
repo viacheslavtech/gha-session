@@ -1,2 +1,2 @@
 # gha-session
-Demo repo
+Demo repo with "Hello World" Java app 
