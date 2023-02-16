@@ -43,6 +43,7 @@ jobs:
           context: ${{ github.workspace }}
       
       - name: "Create release"
+        if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
         uses: softprops/action-gh-release@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
