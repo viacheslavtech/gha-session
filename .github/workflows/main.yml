@@ -2,6 +2,9 @@ name: "Build Java"
 
 on:
   push
+
+permissions:
+  contents: write
   
 jobs:
   build:
@@ -38,5 +41,11 @@ jobs:
         with:
           tags: ${{ github.repository }}:${{ steps.semver.outputs.version }}
           context: ${{ github.workspace }}
+      
+      - name: "Create release"
+        uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ steps.semver.outputs.version }}
       
       
