@@ -33,7 +33,10 @@ jobs:
           java-version: '17'
           cache: 'maven'
       
-      - name: "Build project by Maven"
+      - name: "Set version by Maven"
+        run: mvn -ntp versions:set -DnewVersion=${{ steps.semver.outputs.version }}
+
+      - name: "Build with Maven"
         run: mvn -ntp clean package
        
       - name: "Build Docker image"
@@ -41,6 +44,7 @@ jobs:
         with:
           tags: ${{ github.repository }}:${{ steps.semver.outputs.version }}
           context: ${{ github.workspace }}
+          build-args: SEMVER_NEW_VERSION=${{ steps.semver.outputs.version }}
       
       - name: "Create release"
         if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
