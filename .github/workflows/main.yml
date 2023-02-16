@@ -25,6 +25,7 @@ jobs:
       - name: "Build Docker image"
         uses: docker/build-push-action@v4
         with:
-          tags: gh-actions:latest
+          tags: ${{ github.repository }}:latest
+          context: ${{ github.workspace }}
       
       
