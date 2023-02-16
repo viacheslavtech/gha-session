@@ -6,6 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: "Build Java micro service"
     
     steps:
     
@@ -21,5 +22,9 @@ jobs:
       - name: "Build project by Maven"
         run: mvn clean package
        
+      - name: "Build Docker image"
+        uses: docker/build-push-action@v4
+        with:
+          tags: gh-actions:latest
       
       
