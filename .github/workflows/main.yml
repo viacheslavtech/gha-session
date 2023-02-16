@@ -18,9 +18,10 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '17'
+          cache: 'maven'
       
       - name: "Build project by Maven"
-        run: mvn clean package
+        run: mvn -ntp clean package
        
       - name: "Build Docker image"
         uses: docker/build-push-action@v4
